@@ -1,1 +1,43 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Home Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h1>Display User Data</h1>
+
+    <!-- Here you will display the data submitted by the user -->
+    <div id="userData">
+        <h2>User Information</h2>
+        <div id="response"></div> <!-- This will show the user data from process.php -->
+    </div>
+
+    <script>
+        // Function to load the data from process.php (which received the form data from the user)
+        function loadUserData() {
+            $.ajax({
+                url: 'process.php', // The PHP file that processed the user form data
+                type: 'GET', // You can also use POST if needed
+                success: function(response) {
+                    // Display the response (user data) in your #response div
+                    $('#response').html(response);
+                },
+                error: function(xhr, status, error) {
+                    $('#response').html('Error: ' + error);
+                }
+            });
+        }
+
+        // Load the data on page load (this can be triggered after some event too)
+        $(document).ready(function() {
+            loadUserData();  // Fetch and display the data from process.php
+        });
+    </script>
+
+</body>
+</html>
